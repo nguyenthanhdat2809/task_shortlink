@@ -5,7 +5,7 @@ const Url = require("../models/Url");
 
 exports.index = async (req, res) => {
   try {
-    const urls = await Url.find({});
+    const urls = await Url.find({}).limit(3).sort({'date': -1});
     return res.status(200).json(urls);
   } catch (error) {
     return res.status(404).json(error);
@@ -17,7 +17,7 @@ exports.postUrl = async (req, res, next) => {
   const baseUrl = process.env.baseUrl;
 
   if (!validUrl.isUri(baseUrl)) {
-    return res.status(401).json({
+    return res.status(200).json({
       message: "Invalid base url",
     });
   }
@@ -29,11 +29,18 @@ exports.postUrl = async (req, res, next) => {
   // check long url
   if (validUrl.isUri(longUrl)) {
     try {
+      if (longUrl.includes(baseUrl)) {
+        res.status(200).json({
+          message: "That is already",
+        });
+        return;
+      }
+
       let url = await Url.findOne({ longUrl });
       if (url) {
         res.json(url);
       } else {
-        const shortUrl = baseUrl + "/" + urlCode;
+        const shortUrl = `${baseUrl}/${urlCode}`;
 
         url = new Url({
           longUrl,
@@ -50,7 +57,7 @@ exports.postUrl = async (req, res, next) => {
       console.log(error);
     }
   } else {
-    res.status(401).json({
+    res.status(200).json({
       message: "Invalid long url",
     });
   }
