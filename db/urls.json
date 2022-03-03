@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "62202e2a1d9dbc09583afb70"
+  },
+  "date": "Thu Mar 03 2022 09:55:38 GMT+0700 (Indochina Time)",
+  "longUrl": "https://github.com/nguyenthanhdat2809/short_link",
+  "shortUrl": "http://localhost:5000/CyA1lb7G3",
+  "urlCode": "CyA1lb7G3",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62202f3907e1b72a009ea5a0"
+  },
+  "date": "Thu Mar 03 2022 10:00:09 GMT+0700 (Indochina Time)",
+  "longUrl": "https://github.com/nguyenthanhdat2809/short_linkdsds",
+  "shortUrl": "http://localhost:5000/W0xClgYxA",
+  "urlCode": "W0xClgYxA",
+  "__v": 0
+}]
