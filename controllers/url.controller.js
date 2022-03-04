@@ -1,11 +1,11 @@
-var validUrl = require("valid-url");
-var shortid = require("shortid");
+const validUrl = require("valid-url");
+const { makeid } = require("../utils/random.utils");
 
 const Url = require("../models/Url");
 
 exports.index = async (req, res) => {
   try {
-    const urls = await Url.find({}).limit(3).sort({'date': -1});
+    const urls = await Url.find({}).limit(3).sort({ createdAt: -1 });
     return res.status(200).json(urls);
   } catch (error) {
     return res.status(404).json(error);
@@ -23,7 +23,7 @@ exports.postUrl = async (req, res, next) => {
   }
 
   // create url code
-  const urlCode = shortid.generate();
+  const urlCode = makeid(7);
   console.log(urlCode);
 
   // check long url
@@ -46,7 +46,6 @@ exports.postUrl = async (req, res, next) => {
           longUrl,
           shortUrl,
           urlCode,
-          date: new Date(),
         });
 
         await url.save();
