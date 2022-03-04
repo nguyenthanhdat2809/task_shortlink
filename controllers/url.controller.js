@@ -16,7 +16,6 @@ exports.postUrl = async (req, res, next) => {
   const { longUrl } = req.body;
   const baseUrl = process.env.baseUrl;
 
-  // check is url
   if (!validUrl.isUri(baseUrl)) {
     return res.status(200).json({
       message: "Invalid base url",
